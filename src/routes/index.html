@@ -13,34 +13,36 @@ import {
   UserCheck,
   Handshake,
   AlertTriangle,
-  Clock
+  Clock,
+  X
 } from "lucide-react";
+import { useState } from "react";
 
 const services = [
   {
     icon: HomeIcon,
     title: "Supportive Living (Adults)",
-    description: "Comprehensive support for adults in community living settings.",
+    description: "Comprehensive support for adults in community living settings, promoting independence and well-being.",
   },
   {
     icon: Users,
     title: "Group Care (Youth)",
-    description: "Structured care programs for youth in group settings.",
+    description: "Structured care programs for youth in safe and nurturing group environments.",
   },
   {
     icon: Handshake,
     title: "Community Integration",
-    description: "Support for integrating into community activities.",
+    description: "Programs to support active participation and meaningful engagement in the community.",
   },
   {
     icon: UserCheck,
     title: "Transitional Support",
-    description: "Assistance during life transitions and milestones.",
+    description: "Assistance during life transitions, helping individuals achieve stability and growth.",
   },
   {
     icon: AlertTriangle,
     title: "Crisis Response & Stabilization",
-    description: "Emergency support and crisis intervention services.",
+    description: "Immediate intervention services to ensure safety and stabilization during crises.",
   },
 ];
 
@@ -48,19 +50,60 @@ const values = [
   {
     icon: Heart,
     title: "Compassion",
-    description: "We approach every individual with empathy and understanding.",
+    description: "We approach every individual with empathy, kindness, and understanding.",
   },
   {
     icon: Shield,
     title: "Integrity",
-    description: "We maintain the highest ethical standards in all we do.",
+    description: "We uphold the highest ethical standards in every service and interaction.",
   },
   {
     icon: Users,
     title: "Community",
-    description: "We build strong connections that foster growth and belonging.",
+    description: "We foster strong, supportive relationships within families and communities.",
   },
 ];
+
+// Booking Modal Component
+function BookingModal() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)} size="lg" className="gap-2">
+        <Clock className="h-4 w-4" /> Book Appointment
+      </Button>
+
+      {isOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="bg-white rounded-xl shadow-xl max-w-4xl w-full relative overflow-hidden">
+            <button
+              onClick={() => setIsOpen(false)}
+              className="absolute top-4 right-4 p-2 text-gray-600 hover:text-gray-900"
+            >
+              <X className="h-5 w-5" />
+            </button>
+            <div className="p-6 md:p-10">
+              <h2 className="text-2xl font-bold mb-4 text-center">Book an Appointment</h2>
+              <div className="w-full h-[600px]">
+                <iframe
+                  src="https://calendar.google.com/calendar/embed?src=your_calendar_id_here&ctz=America/Edmonton"
+                  style={{ border: 0 }}
+                  width="100%"
+                  height="100%"
+                  frameBorder="0"
+                  scrolling="no"
+                  title="DyanVa Booking Calendar"
+                  className="rounded-lg shadow-lg"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
 
 export default function Index() {
   return (
@@ -68,7 +111,7 @@ export default function Index() {
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-primary/10 via-background to-accent/10 py-24 lg:py-32">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl">
+          <div className="max-w-3xl text-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground mb-6 animate-fade-in">
               Empowering Lives, <br />
               <span className="text-primary">Strengthening Families</span>
@@ -78,23 +121,14 @@ export default function Index() {
               to individuals and families in need. We believe in building stronger 
               communities through dedicated support and meaningful connections.
             </p>
-            <div className="flex flex-wrap gap-4 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-              <Link to="/book">
-                <Button size="lg" className="gap-2">
-                  Book an Appointment
-                  <ArrowRight className="h-4 w-4" />
-                </Button>
-              </Link>
+            <div className="flex flex-wrap justify-center gap-4 animate-fade-in" style={{ animationDelay: "0.2s" }}>
+              <BookingModal />
               <Link to="/services">
-                <Button size="lg" variant="outline">
-                  Explore Our Services
-                </Button>
+                <Button size="lg" variant="outline">Explore Our Services</Button>
               </Link>
             </div>
           </div>
         </div>
-        
-        {/* Decorative Elements */}
         <div className="absolute top-20 right-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute bottom-10 right-1/4 w-48 h-48 bg-accent/5 rounded-full blur-3xl" />
       </section>
@@ -102,9 +136,7 @@ export default function Index() {
       {/* Mission Highlight */}
       <section className="py-16 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl md:text-3xl font-display font-semibold mb-4">
-            Our Mission
-          </h2>
+          <h2 className="text-2xl md:text-3xl font-display font-semibold mb-4">Our Mission</h2>
           <p className="text-lg max-w-3xl mx-auto opacity-90">
             To provide holistic, person-centered care that promotes independence, dignity, 
             and well-being for individuals and families facing complex challenges.
@@ -116,22 +148,15 @@ export default function Index() {
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-              Our Services
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">Our Services</h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               We offer a range of specialized services designed to meet the unique needs 
               of each individual and family we serve.
             </p>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, index) => (
-              <Card 
-                key={service.title} 
-                className="group hover:shadow-elevated transition-all duration-300 border-border/50 animate-fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
+              <Card key={service.title} className="group hover:shadow-elevated transition-all duration-300 border-border/50 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
                 <CardHeader>
                   <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                     <service.icon className="h-6 w-6 text-primary" />
@@ -142,7 +167,6 @@ export default function Index() {
               </Card>
             ))}
           </div>
-
           <div className="text-center mt-10">
             <Link to="/services">
               <Button variant="outline" size="lg" className="gap-2">
@@ -158,21 +182,14 @@ export default function Index() {
       <section className="py-20 bg-secondary">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-              Our Core Values
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">Our Core Values</h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               These principles guide everything we do at DyanVa Family Services.
             </p>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {values.map((value, index) => (
-              <div 
-                key={value.title}
-                className="text-center animate-fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
+              <div key={value.title} className="text-center animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
                 <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-6">
                   <value.icon className="h-8 w-8 text-primary-foreground" />
                 </div>
@@ -191,20 +208,13 @@ export default function Index() {
             <CardContent className="p-8 md:p-12">
               <div className="grid md:grid-cols-2 gap-8 items-center">
                 <div>
-                  <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-                    Ready to Get Started?
-                  </h2>
+                  <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">Ready to Get Started?</h2>
                   <p className="text-primary-foreground/90 text-lg mb-6">
                     Contact us today to learn more about our services or to schedule 
                     a consultation. We're here to help.
                   </p>
                   <div className="flex flex-wrap gap-4">
-                    <Link to="/book">
-                      <Button size="lg" variant="secondary" className="gap-2">
-                        <Clock className="h-4 w-4" />
-                        Book Appointment
-                      </Button>
-                    </Link>
+                    <BookingModal />
                     <Link to="/contact">
                       <Button size="lg" variant="outline" className="bg-transparent border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">
                         Contact Us
@@ -219,7 +229,7 @@ export default function Index() {
                     </div>
                     <div>
                       <p className="text-sm opacity-80">Call Us</p>
-                      <p className="font-semibold">(555) 123-4567</p>
+                      <p className="font-semibold">(780) 123-4567</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
