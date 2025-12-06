@@ -1,0 +1,244 @@
+import { Link } from "react-router-dom";
+import { Layout } from "@/components/layout/Layout";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { 
+  Heart, 
+  Users, 
+  Shield, 
+  Phone, 
+  Mail, 
+  ArrowRight,
+  Home as HomeIcon,
+  UserCheck,
+  Handshake,
+  AlertTriangle,
+  Clock
+} from "lucide-react";
+
+const services = [
+  {
+    icon: HomeIcon,
+    title: "Supportive Living (Adults)",
+    description: "Comprehensive support for adults in community living settings.",
+  },
+  {
+    icon: Users,
+    title: "Group Care (Youth)",
+    description: "Structured care programs for youth in group settings.",
+  },
+  {
+    icon: Handshake,
+    title: "Community Integration",
+    description: "Support for integrating into community activities.",
+  },
+  {
+    icon: UserCheck,
+    title: "Transitional Support",
+    description: "Assistance during life transitions and milestones.",
+  },
+  {
+    icon: AlertTriangle,
+    title: "Crisis Response & Stabilization",
+    description: "Emergency support and crisis intervention services.",
+  },
+];
+
+const values = [
+  {
+    icon: Heart,
+    title: "Compassion",
+    description: "We approach every individual with empathy and understanding.",
+  },
+  {
+    icon: Shield,
+    title: "Integrity",
+    description: "We maintain the highest ethical standards in all we do.",
+  },
+  {
+    icon: Users,
+    title: "Community",
+    description: "We build strong connections that foster growth and belonging.",
+  },
+];
+
+export default function Index() {
+  return (
+    <Layout>
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-br from-primary/10 via-background to-accent/10 py-24 lg:py-32">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground mb-6 animate-fade-in">
+              Empowering Lives, <br />
+              <span className="text-primary">Strengthening Families</span>
+            </h1>
+            <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed animate-fade-in" style={{ animationDelay: "0.1s" }}>
+              DyanVa Family Services provides compassionate, person-centered care 
+              to individuals and families in need. We believe in building stronger 
+              communities through dedicated support and meaningful connections.
+            </p>
+            <div className="flex flex-wrap gap-4 animate-fade-in" style={{ animationDelay: "0.2s" }}>
+              <Link to="/book">
+                <Button size="lg" className="gap-2">
+                  Book an Appointment
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+              </Link>
+              <Link to="/services">
+                <Button size="lg" variant="outline">
+                  Explore Our Services
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+        
+        {/* Decorative Elements */}
+        <div className="absolute top-20 right-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-10 right-1/4 w-48 h-48 bg-accent/5 rounded-full blur-3xl" />
+      </section>
+
+      {/* Mission Highlight */}
+      <section className="py-16 bg-primary text-primary-foreground">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-2xl md:text-3xl font-display font-semibold mb-4">
+            Our Mission
+          </h2>
+          <p className="text-lg max-w-3xl mx-auto opacity-90">
+            To provide holistic, person-centered care that promotes independence, dignity, 
+            and well-being for individuals and families facing complex challenges.
+          </p>
+        </div>
+      </section>
+
+      {/* Services Overview */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+              Our Services
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              We offer a range of specialized services designed to meet the unique needs 
+              of each individual and family we serve.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {services.map((service, index) => (
+              <Card 
+                key={service.title} 
+                className="group hover:shadow-elevated transition-all duration-300 border-border/50 animate-fade-in"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <CardHeader>
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                    <service.icon className="h-6 w-6 text-primary" />
+                  </div>
+                  <CardTitle className="text-lg">{service.title}</CardTitle>
+                  <CardDescription>{service.description}</CardDescription>
+                </CardHeader>
+              </Card>
+            ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <Link to="/services">
+              <Button variant="outline" size="lg" className="gap-2">
+                View All Services
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Core Values */}
+      <section className="py-20 bg-secondary">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+              Our Core Values
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              These principles guide everything we do at DyanVa Family Services.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {values.map((value, index) => (
+              <div 
+                key={value.title}
+                className="text-center animate-fade-in"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-6">
+                  <value.icon className="h-8 w-8 text-primary-foreground" />
+                </div>
+                <h3 className="text-xl font-display font-semibold mb-3">{value.title}</h3>
+                <p className="text-muted-foreground">{value.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact CTA */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <Card className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground border-0 overflow-hidden relative">
+            <CardContent className="p-8 md:p-12">
+              <div className="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                  <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+                    Ready to Get Started?
+                  </h2>
+                  <p className="text-primary-foreground/90 text-lg mb-6">
+                    Contact us today to learn more about our services or to schedule 
+                    a consultation. We're here to help.
+                  </p>
+                  <div className="flex flex-wrap gap-4">
+                    <Link to="/book">
+                      <Button size="lg" variant="secondary" className="gap-2">
+                        <Clock className="h-4 w-4" />
+                        Book Appointment
+                      </Button>
+                    </Link>
+                    <Link to="/contact">
+                      <Button size="lg" variant="outline" className="bg-transparent border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">
+                        Contact Us
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-primary-foreground/20 rounded-lg flex items-center justify-center">
+                      <Phone className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <p className="text-sm opacity-80">Call Us</p>
+                      <p className="font-semibold">(555) 123-4567</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-primary-foreground/20 rounded-lg flex items-center justify-center">
+                      <Mail className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <p className="text-sm opacity-80">Email Us</p>
+                      <p className="font-semibold">info@dyanva.com</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+            <div className="absolute -top-20 -right-20 w-64 h-64 bg-primary-foreground/5 rounded-full" />
+            <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-primary-foreground/5 rounded-full" />
+          </Card>
+        </div>
+      </section>
+    </Layout>
+  );
+}
